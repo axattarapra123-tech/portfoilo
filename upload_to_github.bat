@@ -37,7 +37,7 @@ echo ===================================================
 echo   [FINAL STEP] Pushing code to GitHub...
 echo   (Note: If GitHub prompts for login, please complete it)
 echo ===================================================
-git push -u origin main
+git push -f origin main
 echo.
 
 echo ===================================================
