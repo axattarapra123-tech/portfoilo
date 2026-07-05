@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary-light: #3b82f6;
+  --color-primary: #00d2ff; /* Neon Blue */
+  --color-primary-dark: #005f73;
+  --color-secondary-light: #c084fc;
+  --color-secondary: #9d4edd; /* Purple Glow */
+  --color-secondary-dark: #5a189a;
+  
+  --color-dark-bg: #020205; /* Deep Black-Navy */
+  --color-dark-bg-card: rgba(10, 10, 20, 0.4);
+  --color-dark-bg-card-border: rgba(255, 255, 255, 0.08);
+  
+  --color-light-bg: #f8fafc;
+  --color-light-bg-card: rgba(255, 255, 255, 0.7);
+  --color-light-bg-card-border: rgba(0, 0, 0, 0.06);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --animate-gradient-shift: gradient-shift 12s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+  }
+}
+
+@utility glass-panel {
+  background: rgba(5, 5, 12, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@utility glass-panel-heavy {
+  background: rgba(3, 3, 8, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: initial; /* Lenis handles smooth scrolling */
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    transition-property: color, background-color;
+    transition-duration: 300ms;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    background-color: #020205;
+    color: #f8fafc;
+  }
+
+  body.light {
+    background-color: #f8fafc;
+    color: #0f172a;
+    
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    
+    .glass-panel-heavy {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(2, 2, 5, 0.9);
+}
+.light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d2ff, #9d4edd);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00b4db, #8a2be2);
+}
+
+/* Card Glow Hover effects */
+.card-glow {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-glow::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #00d2ff, #9d4edd);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.card-glow:hover::after {
+  opacity: 0.45;
+}
+
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 210, 255, 0.25);
+}
+
+.light .card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(157, 78, 221, 0.15);
+}
+
+/* Animated gradient backgrounds */
+.bg-gradient-animate {
+  background: linear-gradient(-45deg, #020205, #080721, #120b30, #040c24);
+  background-size: 400% 400%;
+}
+
+.light .bg-gradient-animate {
+  background: linear-gradient(-45deg, #f8fafc, #f1f5f9, #e2e8f0, #f8fafc);
+  background-size: 400% 400%;
+}
+
+/* Hide default cursor on desktop device when custom cursor is active */
+@media (min-width: 1024px) {
+  .custom-cursor-active, .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Custom Text Selection */
+::selection {
+  background: rgba(0, 210, 255, 0.3);
+  color: #ffffff;
+}
+
+.light ::selection {
+  background: rgba(157, 78, 221, 0.3);
+  color: #0f172a;
+}
